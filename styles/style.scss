@@ -1,44 +1,90 @@
 @import "./variables";
 @import "./reset";
-
-@mixin flex($direction: row, $align: flex-start, $justify: flex-start) {
+@import "./mixins";
+nav {
   display: flex;
-  flex-direction: $direction;
-  align-items: $align;
-  justify-content: $justify;
-}
+  align-items: center;
 
-@mixin pinkButton {
-  margin-left: auto;
-  padding: 14px 24px;
-  border-radius: 24px;
-  border: none;
-  background-color: $dark-pink;
-  color: $link-water-white;
-  font-size: $Psize;
-  font-weight: 700;
-  font-family: $sans;
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    margin-left: 64px;
 
-  &:hover {
-    background-color: $charm-pink;
+    @media (max-width: 700px) {
+      display: none;
+    }
+
+    li {
+      a {
+        color: $san-juan-blue;
+        font-family: Public Sans;
+        font-size: $Psize;
+        font-weight: 700;
+      }
+    }
+  }
+  .btn {
+    margin-left: auto;
+    padding: 14px 24px;
+    background-color: $dark-pink;
+    border-radius: 24px;
+    color: $link-water-white;
+    font-family: $sans;
+    font-size: $Psize;
+    font-weight: 700;
+
+    @media (max-width: 700px) {
+      display: none;
+    }
+  }
+
+  #menu {
+    display: none;
+
+    @media (max-width: 700px) {
+      display: inline-block;
+      margin-left: auto;
+    }
   }
 }
 
-@mixin regularH2($text-color) {
-  font-family: $serif;
-  font-size: 48px;
-  font-weight: 400;
-  line-height: 56px;
-  letter-spacing: -0.369px;
-  color: $text-color;
-}
+form {
+  max-width: 445px;
+  margin: 21px 0 16px 0;
+  background-color: $link-water-white;
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-between;
 
-@mixin regularP($text-color) {
-  color: $text-color;
-  font-family: $sans;
-  font-size: $Psize;
-  font-weight: 400;
-  line-height: 28px;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    background-color: $body-bg;
+    box-shadow: unset;
+    gap: 16px;
+    width: 100%;
+  }
+  input[type="text"] {
+    background-color: $link-water-white;
+    color: $light-san-juan-blue;
+    padding: 14px 27px;
+    border-radius: 24px;
+    font-size: $Psize;
+    font-family: $sans;
+    border: none;
+    outline: none;
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+  }
+  input[type="submit"] {
+    @include pinkButton();
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+  }
 }
 
 header {
@@ -54,54 +100,6 @@ header {
 
   @media (max-width: 700px) {
     padding: 40px 24px 82px 24px;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-
-    ul {
-      display: flex;
-      list-style: none;
-      gap: 40px;
-      margin-left: 64px;
-
-      @media (max-width: 700px) {
-        display: none;
-      }
-
-      li {
-        a {
-          color: $san-juan-blue;
-          font-family: Public Sans;
-          font-size: $Psize;
-          font-weight: 700;
-        }
-      }
-    }
-    .btn {
-      margin-left: auto;
-      padding: 14px 24px;
-      background-color: $dark-pink;
-      border-radius: 24px;
-      color: $link-water-white;
-      font-family: $sans;
-      font-size: $Psize;
-      font-weight: 700;
-
-      @media (max-width: 700px) {
-        display: none;
-      }
-    }
-
-    #menu {
-      display: none;
-
-      @media (max-width: 700px) {
-        display: inline-block;
-        margin-left: auto;
-      }
-    }
   }
 
   section {
@@ -144,43 +142,7 @@ header {
           font-size: 32px;
         }
       }
-      form {
-        max-width: 445px;
-        margin: 21px 0 16px 0;
-        background-color: $link-water-white;
-        border-radius: 24px;
-        display: flex;
-        justify-content: space-between;
 
-        @media (max-width: 700px) {
-          flex-direction: column;
-          background-color: $body-bg;
-          box-shadow: unset;
-          gap: 16px;
-          width: 100%;
-        }
-        input[type="text"] {
-          background-color: $link-water-white;
-          color: $light-san-juan-blue;
-          padding: 14px 27px;
-          border-radius: 24px;
-          font-size: $Psize;
-          font-family: $sans;
-          border: none;
-          outline: none;
-
-          @media (max-width: 700px) {
-            width: 100%;
-          }
-        }
-        input[type="submit"] {
-          @include pinkButton();
-
-          @media (max-width: 700px) {
-            width: 100%;
-          }
-        }
-      }
       p {
         @include regularP($light-san-juan-blue);
         margin-left: 27px;
@@ -326,6 +288,7 @@ main {
     padding: 143px 165px 96px 165px;
 
     @media (max-width: 992px) {
+      padding: 80px 24px;
     }
 
     @media (max-width: 700px) {
@@ -400,6 +363,113 @@ main {
           @include regularP($light-san-juan-blue);
         }
       }
+    }
+
+    .cards {
+      width: 100%;
+      margin-top: 146px;
+      @include flex(row, center, center);
+
+      @media (max-width: 700px) {
+        @include flex(column, center);
+        gap: 48px;
+      }
+      .card {
+        max-width: 350px;
+        @include flex(column, center, space-evenly);
+        text-align: center;
+
+        h3 {
+          @include regularH2($san-juan-blue);
+          margin: 32px 0 16px 0;
+          font-size: 25px;
+        }
+
+        p {
+          @include regularP($light-san-juan-blue);
+        }
+      }
+    }
+
+    .start {
+      margin-top: 96px;
+      @include flex(row, center, space-evenly);
+
+      @media (max-width: 992px) {
+        @include flex(column, center);
+      }
+      h2 {
+        @include regularH2($san-juan-blue);
+
+        @media (max-width: 700px) {
+          font-size: 32px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  background-color: $mirage-blue;
+  @include flex(row, center, space-between);
+  padding: 32px 165px;
+  position: relative;
+  overflow: hidden;
+
+  #footer-circle {
+    position: absolute;
+    right: -390px;
+    bottom: -540px;
+
+    @media (max-width: 992px) {
+      right: -390px;
+      bottom: -544px;
+    }
+
+    @media (max-width: 700px) {
+      left: 50%;
+      transform: translate(-50%);
+      bottom: -604px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    padding: 46px 24px;
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  nav {
+    @media (max-width: 700px) {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    ul {
+      @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        text-align: center;
+      }
+      li {
+        a {
+          color: $link-water-white;
+        }
+      }
+    }
+  }
+
+  .social-icons {
+    @include flex(row, center, center);
+    gap: 24px;
+
+    @media (max-width: 700px) {
+      margin-top: 40px;
     }
   }
 }

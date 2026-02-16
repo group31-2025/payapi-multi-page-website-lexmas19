@@ -1,0 +1,39 @@
+@mixin flex($direction: row, $align: flex-start, $justify: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin pinkButton {
+  margin-left: auto;
+  padding: 14px 24px;
+  border-radius: 24px;
+  border: none;
+  background-color: $dark-pink;
+  color: $link-water-white;
+  font-size: $Psize;
+  font-weight: 700;
+  font-family: $sans;
+
+  &:hover {
+    background-color: $charm-pink;
+  }
+}
+
+@mixin regularH2($text-color) {
+  font-family: $serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 56px;
+  letter-spacing: -0.369px;
+  color: $text-color;
+}
+
+@mixin regularP($text-color) {
+  color: $text-color;
+  font-family: $sans;
+  font-size: $Psize;
+  font-weight: 400;
+  line-height: 28px;
+}
